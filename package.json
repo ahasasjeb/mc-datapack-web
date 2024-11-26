@@ -1,11 +1,14 @@
 {
   "name": "mc-datapack-web",
-  "module": "index.js",
+  "module": "worker.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "wrangler": "^3.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

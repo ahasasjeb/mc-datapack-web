@@ -1,4 +1,7 @@
 # 欢迎来到Minecraft 数据包 非官方文档
+这里是基本介绍，左侧是目录，右侧是内容
+本页面引用了Minecraft Wiki 数据
+[Wiki链接](https://zh.minecraft.wiki/w/数据包)。
 
 ## 数据包就是由Minecraft命令组成的
 ```mcfunction
@@ -91,3 +94,39 @@ tp @a 0 0 0
                     * `<_超平坦预设名称_>.json`
                 * `world_preset`：存放世界预设文件
                     * `<_世界预设名称_>.json`
+pack.mcmeta
+---
+- **根对象 (compound)**
+  - **pack (compound)**: 存放数据包信息。
+    - **description (string/list/compound)**: 数据包的描述信息。
+      - 如果是字符串 (string)，则是简单的描述文本。
+      - 如果是列表 (list)，则可以包含多个文本组件。
+      - 如果是复合对象 (compound)，则可能包含更复杂的文本组件结构。
+    - **pack_format (int)**: 数据包支持的版本编号。
+    - **supported_formats (int/int-array/compound)**: （可选）数据包支持的版本编号范围。
+      - **int**: 支持单个版本。
+      - **int-array**: 支持的版本范围。
+      - **compound**: 版本范围。
+        - **min_inclusive (int)**: 最低兼容版本。
+        - **max_inclusive (int)**: 最高支持版本。
+  - **filter (compound)**: （可选）包过滤器，用于指定数据包要忽略的文件。
+    - **block (list of compound)**: 模式列表。
+      - **namespace (string)**: 要滤除文件的命名空间的正则表达式。
+      - **path (string)**: 要滤除文件的路径的正则表达式。
+  - **features (compound)**: （可选）实验性内容启用。
+    - **enabled (list of string)**: 启用的内容列表。
+  - **overlays (compound)**: （可选）指定要覆盖的部分。
+    - **entries (list of compound)**: 覆盖列表。
+      - **formats (int/int-array/compound)**: 版本编号范围。
+      - **directory (string)**: 要覆盖的目录名。
+
+一个最简单的pack.mcmeta文件
+```json
+{
+  "pack": {
+    "pack_format": 41,
+    "description": "我是一个数据包"
+  }
+}
+```
+41是1.20.6版本的数据包
