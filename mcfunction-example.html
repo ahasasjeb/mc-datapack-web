@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MCFunction 语法高亮示例</title>
+    <style>
+        body {
+            background: #2d2d2d;
+            margin: 40px;
+        }
+        
+.mcfunction-viewer {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    background: #1e1e1e !important;
+    color: #d4d4d4;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 4;
+    hyphens: none;
+    padding: 1em;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 0.3em;
+    position: relative;
+    display: flex;
+    min-height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mcfunction-content {
+    overflow: auto;
+    padding-right: 20px;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+.mcfunction-viewer .command { color: #ffaa00; font-weight: bold; }
+.mcfunction-viewer .selector { color: #55ffff; }
+.mcfunction-viewer .coordinates { color: #55ff55; }
+.mcfunction-viewer .string { color: #ff5555; }
+.mcfunction-viewer .comment { color: #7f7f7f; }
+.mcfunction-viewer .number { color: #55ff55; }
+.mcfunction-viewer .execute-modifier { color: #ff55ff; }
+.mcfunction-viewer .execute-condition { color: #ff5555; }
+.mcfunction-viewer .parameter { color: #55ffff; }
+.mcfunction-viewer .dimension { color: #55ffff; }
+.mcfunction-viewer .boolean { color: #ffaa00; }
+
+.mcfunction-copy-button {
+    position: sticky;
+    right: 0.5em;
+    top: 0.5em;
+    height: fit-content;
+    margin-left: 10px;
+    flex-shrink: 0;
+    padding: 0.4em 0.8em;
+    background: #333;
+    border: 1px solid #666;
+    border-radius: 0.3em;
+    color: #d4d4d4;
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.mcfunction-copy-button:hover {
+    background: #444;
+}
+
+.mcfunction-copy-button.success {
+    background: #28a745;
+    border-color: #28a745;
+}
+
+.mcfunction-viewer:hover .mcfunction-copy-button {
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+    <pre class="mcfunction-viewer"><code class="mcfunction-content"><div class="comment"># 这是一个注释</div><div><span class="command">execute</span> <span class="execute-modifier">as</span> <span class="selector">@a</span> <span class="execute-modifier">at</span> <span class="selector">@s</span> <span class="command">run</span> <span class="command">effect</span> <span class="command">give</span> <span class="selector">@s</span> <span class="string">speed</span> <span class="number">10</span> <span class="number">1</span> <span class="boolean"><span class="string">true</span></span></div><div><span class="command">give</span> <span class="selector">@p</span> diamond_sword{<span class="string">display</span>:{Name:'{"text":"神剑"}'}} <span class="number">1</span></div><div><span class="command">scoreboard</span> players <span class="string">add</span> <span class="selector">@a</span> <span class="parameter">score</span> <span class="number">1</span></div></code><button class="mcfunction-copy-button">复制</button></pre>
+    
+    <script>
+        // 添加复制功能
+        document.querySelector('.mcfunction-copy-button').addEventListener('click', function() {
+            const content = document.querySelector('.mcfunction-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                this.textContent = '已复制';
+                this.classList.add('success');
+                setTimeout(() => {
+                    this.textContent = '复制';
+                    this.classList.remove('success');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
